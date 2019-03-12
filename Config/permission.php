@@ -1,4 +1,28 @@
 <?php
+// Define helper functions here
+
+/**
+ * @param string $guard
+ *
+ * @return string|null
+ */
+function getModelForGuard(string $guard)
+{
+    return collect(config('auth.guards'))
+        ->map(function ($guard) {
+            if (! isset($guard['provider'])) {
+                return;
+            }
+
+            return config("auth.providers.{$guard['provider']}.model");
+        })->get($guard);
+}
+
+function isNotLumen() : bool
+{
+    return ! preg_match('/lumen/i', app()->version());
+}
+
 
 return [
 
@@ -10,10 +34,10 @@ return [
          * is often just the "Permission" model but you may use whatever you like.
          *
          * The model you want to use as a Permission model needs to implement the
-         * `Minhsieh\CockpitPermission\Contracts\Permission` contract.
+         * `Modules\Cockpit\Permission\Contracts\Permission` contract.
          */
 
-        'permission' => Modules\Permission\Models\Permission::class,
+        'permission' => Modules\Cockpit\Permission\Models\Permission::class,
 
         /*
          * When using the "HasRoles" trait from this package, we need to know which
@@ -21,10 +45,10 @@ return [
          * is often just the "Role" model but you may use whatever you like.
          *
          * The model you want to use as a Role model needs to implement the
-         * `Minhsieh\CockpitPermission\Contracts\Role` contract.
+         * `Modules\Cockpit\Permission\Contracts\Role` contract.
          */
 
-        'role' => Modules\Permission\Models\Role::class,
+        'role' => Modules\Cockpit\Permission\Models\Role::class,
 
     ],
 

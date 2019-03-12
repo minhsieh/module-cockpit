@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

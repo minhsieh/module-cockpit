@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Permission\Middlewares;
+namespace Modules\Cockpit\Permission\Middlewares;
 
 use Closure;
-use Modules\Permission\Exceptions\UnauthorizedException;
+use Modules\Cockpit\Permission\Exceptions\UnauthorizedException;
 
 class PermissionMiddleware
 {

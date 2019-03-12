@@ -19,8 +19,8 @@ class CreatePermissionsTable extends Migration
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('display_name');
-            $table->boolean('is_team')->comment('此權限是否顯示於團隊層');
+            $table->string('display_name')->nullable();
+            $table->string('type')->nullable();
             $table->string('guard_name');
             $table->timestamps();
         });
@@ -28,8 +28,8 @@ class CreatePermissionsTable extends Migration
         Schema::create($tableNames['roles'], function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('display_name')->nullable();
             $table->string('guard_name');
-            $table->integer('team_id')->index()->default(0)->comment('對應的team_id');
             $table->timestamps();
         });
 

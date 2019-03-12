@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Permission\Traits;
+namespace Modules\Cockpit\Permission\Traits;
 
-use Modules\Permission\PermissionRegistrar;
+use Modules\Cockpit\Permission\PermissionRegistrar;
 
 trait RefreshesPermissionCache
 {

@@ -8,13 +8,18 @@ use Illuminate\Routing\Controller;
 
 class IndexController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:superadmin']);
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('cockpit::index');
+        return view('cockpit::admin.index');
     }
 
     /**

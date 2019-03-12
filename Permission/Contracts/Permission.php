@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Contracts;
+namespace Modules\Cockpit\Permission\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -19,7 +19,7 @@ interface Permission
      * @param string $name
      * @param string|null $guardName
      *
-     * @throws \Modules\Permission\Exceptions\PermissionDoesNotExist
+     * @throws \Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist
      *
      * @return Permission
      */
@@ -31,7 +31,7 @@ interface Permission
      * @param int $id
      * @param string|null $guardName
      *
-     * @throws \Modules\Permission\Exceptions\PermissionDoesNotExist
+     * @throws \Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist
      *
      * @return Permission
      */
@@ -45,5 +45,5 @@ interface Permission
      *
      * @return Permission
      */
-    public static function findOrCreate(string $name, $guardName): self;
+    public static function findOrCreate(string $name, $display_name , $type, $guardName): self;
 }

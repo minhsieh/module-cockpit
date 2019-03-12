@@ -4,7 +4,7 @@ namespace Modules\Cockpit\Entities;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Modules\Permission\Traits\HasRoles as HasRoles;
+use Modules\Cockpit\Permission\Traits\HasRoles as HasRoles;
 
 class User extends Authenticatable
 {

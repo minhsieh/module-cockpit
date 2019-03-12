@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
-use Modules\Permission\Contracts\Role;
-use Modules\Permission\Contracts\Permission;
-use Modules\Permission\Exceptions\GuardDoesNotMatch;
-use Modules\Permission\Exceptions\PermissionDoesNotExist;
+use Modules\Cockpit\Permission\Contracts\Role;
+use Modules\Cockpit\Permission\Contracts\Permission;
+use Modules\Cockpit\Permission\Exceptions\GuardDoesNotMatch;
+use Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist;
 
 class HasPermissionsTest extends TestCase
 {

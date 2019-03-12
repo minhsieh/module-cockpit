@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Permission\Traits;
+namespace Modules\Cockpit\Permission\Traits;
 
 use Illuminate\Support\Collection;
-use Modules\Permission\Contracts\Role;
+use Modules\Cockpit\Permission\Contracts\Role;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Permission\PermissionRegistrar;
+use Modules\Cockpit\Permission\PermissionRegistrar;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasRoles
@@ -52,7 +52,7 @@ trait HasRoles
      * Scope the model query to certain roles only.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|array|\Modules\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|array|\Modules\Cockpit\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
      * @param string $guard
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -90,7 +90,7 @@ trait HasRoles
     /**
      * Assign the given role to the model.
      *
-     * @param array|string|\Modules\Permission\Contracts\Role ...$roles
+     * @param array|string|\Modules\Cockpit\Permission\Contracts\Role ...$roles
      *
      * @return $this
      */
@@ -142,7 +142,7 @@ trait HasRoles
     /**
      * Revoke the given role from the model.
      *
-     * @param string|\Modules\Permission\Contracts\Role $role
+     * @param string|\Modules\Cockpit\Permission\Contracts\Role $role
      */
     public function removeRole($role)
     {
@@ -154,7 +154,7 @@ trait HasRoles
     /**
      * Remove all current roles and set the given ones.
      *
-     * @param array|\Modules\Permission\Contracts\Role|string ...$roles
+     * @param array|\Modules\Cockpit\Permission\Contracts\Role|string ...$roles
      *
      * @return $this
      */
@@ -168,7 +168,7 @@ trait HasRoles
     /**
      * Determine if the model has (one of) the given role(s).
      *
-     * @param string|int|array|\Modules\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|int|array|\Modules\Cockpit\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
      *
      * @return bool
      */
@@ -206,7 +206,7 @@ trait HasRoles
     /**
      * Determine if the model has any of the given role(s).
      *
-     * @param string|array|\Modules\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|array|\Modules\Cockpit\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
      *
      * @return bool
      */
@@ -218,7 +218,7 @@ trait HasRoles
     /**
      * Determine if the model has all of the given role(s).
      *
-     * @param string|\Modules\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|\Modules\Cockpit\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
      *
      * @return bool
      */

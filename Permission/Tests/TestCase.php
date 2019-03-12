@@ -1,34 +1,34 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
 use Illuminate\Support\Facades\Cache;
-use Modules\Permission\Contracts\Role;
+use Modules\Cockpit\Permission\Contracts\Role;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use Modules\Permission\PermissionRegistrar;
-use Modules\Permission\Contracts\Permission;
+use Modules\Cockpit\Permission\PermissionRegistrar;
+use Modules\Cockpit\Permission\Contracts\Permission;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Modules\Permission\PermissionServiceProvider;
+use Modules\Cockpit\Permission\PermissionServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
-    /** @var \Modules\Permission\Test\User */
+    /** @var \Modules\Cockpit\Permission\Test\User */
     protected $testUser;
 
-    /** @var \Modules\Permission\Test\Admin */
+    /** @var \Modules\Cockpit\Permission\Test\Admin */
     protected $testAdmin;
 
-    /** @var \Modules\Permission\Models\Role */
+    /** @var \Modules\Cockpit\Permission\Models\Role */
     protected $testUserRole;
 
-    /** @var \Modules\Permission\Models\Role */
+    /** @var \Modules\Cockpit\Permission\Models\Role */
     protected $testAdminRole;
 
-    /** @var \Modules\Permission\Models\Permission */
+    /** @var \Modules\Cockpit\Permission\Models\Permission */
     protected $testUserPermission;
 
-    /** @var \Modules\Permission\Models\Permission */
+    /** @var \Modules\Cockpit\Permission\Models\Permission */
     protected $testAdminPermission;
 
     public function setUp()

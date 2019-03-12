@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission;
+namespace Modules\Cockpit\Permission;
 
 use Illuminate\Support\Collection;
 

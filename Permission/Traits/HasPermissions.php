@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Permission\Traits;
+namespace Modules\Cockpit\Permission\Traits;
 
-use Modules\Permission\Guard;
+use Modules\Cockpit\Permission\Guard;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Permission\PermissionRegistrar;
-use Modules\Permission\Contracts\Permission;
-use Modules\Permission\Exceptions\GuardDoesNotMatch;
+use Modules\Cockpit\Permission\PermissionRegistrar;
+use Modules\Cockpit\Permission\Contracts\Permission;
+use Modules\Cockpit\Permission\Exceptions\GuardDoesNotMatch;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Modules\Permission\Exceptions\PermissionDoesNotExist;
+use Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist;
 
 trait HasPermissions
 {
@@ -53,7 +53,7 @@ trait HasPermissions
      * Scope the model query to certain permissions only.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|array|\Modules\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Modules\Cockpit\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -86,7 +86,7 @@ trait HasPermissions
     }
 
     /**
-     * @param string|array|\Modules\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Modules\Cockpit\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return array
      */
@@ -110,7 +110,7 @@ trait HasPermissions
     /**
      * Determine if the model may perform the given permission.
      *
-     * @param string|int|\Modules\Permission\Contracts\Permission $permission
+     * @param string|int|\Modules\Cockpit\Permission\Contracts\Permission $permission
      * @param string|null $guardName
      *
      * @return bool
@@ -153,7 +153,7 @@ trait HasPermissions
     /**
      * An alias to hasPermissionTo(), but avoids throwing an exception.
      *
-     * @param string|int|\Modules\Permission\Contracts\Permission $permission
+     * @param string|int|\Modules\Cockpit\Permission\Contracts\Permission $permission
      * @param string|null $guardName
      *
      * @return bool
@@ -216,7 +216,7 @@ trait HasPermissions
     /**
      * Determine if the model has, via roles, the given permission.
      *
-     * @param \Modules\Permission\Contracts\Permission $permission
+     * @param \Modules\Cockpit\Permission\Contracts\Permission $permission
      *
      * @return bool
      */
@@ -228,7 +228,7 @@ trait HasPermissions
     /**
      * Determine if the model has the given permission.
      *
-     * @param string|int|\Modules\Permission\Contracts\Permission $permission
+     * @param string|int|\Modules\Cockpit\Permission\Contracts\Permission $permission
      *
      * @return bool
      */
@@ -287,7 +287,7 @@ trait HasPermissions
     /**
      * Grant the given permission(s) to a role.
      *
-     * @param string|array|\Modules\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Modules\Cockpit\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return $this
      */
@@ -340,7 +340,7 @@ trait HasPermissions
     /**
      * Remove all current permissions and set the given ones.
      *
-     * @param string|array|\Modules\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Modules\Cockpit\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return $this
      */
@@ -354,7 +354,7 @@ trait HasPermissions
     /**
      * Revoke the given permission.
      *
-     * @param \Modules\Permission\Contracts\Permission|\Modules\Permission\Contracts\Permission[]|string|string[] $permission
+     * @param \Modules\Cockpit\Permission\Contracts\Permission|\Modules\Cockpit\Permission\Contracts\Permission[]|string|string[] $permission
      *
      * @return $this
      */
@@ -375,9 +375,9 @@ trait HasPermissions
     }
 
     /**
-     * @param string|array|\Modules\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Modules\Cockpit\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
-     * @return \Modules\Permission\Contracts\Permission|\Modules\Permission\Contracts\Permission[]|\Illuminate\Support\Collection
+     * @return \Modules\Cockpit\Permission\Contracts\Permission|\Modules\Cockpit\Permission\Contracts\Permission[]|\Illuminate\Support\Collection
      */
     protected function getStoredPermission($permissions)
     {
@@ -402,9 +402,9 @@ trait HasPermissions
     }
 
     /**
-     * @param \Modules\Permission\Contracts\Permission|\Modules\Permission\Contracts\Role $roleOrPermission
+     * @param \Modules\Cockpit\Permission\Contracts\Permission|\Modules\Cockpit\Permission\Contracts\Role $roleOrPermission
      *
-     * @throws \Modules\Permission\Exceptions\GuardDoesNotMatch
+     * @throws \Modules\Cockpit\Permission\Exceptions\GuardDoesNotMatch
      */
     protected function ensureModelSharesGuard($roleOrPermission)
     {

@@ -18,5 +18,9 @@ Route::prefix('cockpit')->group(function() {
         Auth::logout();
         return redirect('/cockpit');
     });
+
+    Route::prefix('admin')->group(function() {
+        Route::get('/' , 'Admin\IndexController@index');
+    });
 });
 

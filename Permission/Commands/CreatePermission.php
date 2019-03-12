@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Permission\Commands;
+namespace Modules\Cockpit\Permission\Commands;
 
 use Illuminate\Console\Command;
-use Modules\Permission\Contracts\Permission as PermissionContract;
+use Modules\Cockpit\Permission\Contracts\Permission as PermissionContract;
 
 class CreatePermission extends Command
 {

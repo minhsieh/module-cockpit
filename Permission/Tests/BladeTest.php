@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
 use Artisan;
-use Modules\Permission\Contracts\Role;
+use Modules\Cockpit\Permission\Contracts\Role;
 
 class BladeTest extends TestCase
 {

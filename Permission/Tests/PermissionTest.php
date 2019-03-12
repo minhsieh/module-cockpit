@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
-use Modules\Permission\Contracts\Permission;
-use Modules\Permission\Exceptions\PermissionAlreadyExists;
+use Modules\Cockpit\Permission\Contracts\Permission;
+use Modules\Cockpit\Permission\Exceptions\PermissionAlreadyExists;
 
 class PermissionTest extends TestCase
 {

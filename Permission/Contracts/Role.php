@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Contracts;
+namespace Modules\Cockpit\Permission\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -19,9 +19,9 @@ interface Role
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Modules\Permission\Contracts\Role
+     * @return \Modules\Cockpit\Permission\Contracts\Role
      *
-     * @throws \Modules\Permission\Exceptions\RoleDoesNotExist
+     * @throws \Modules\Cockpit\Permission\Exceptions\RoleDoesNotExist
      */
     public static function findByName(string $name, $guardName): self;
 
@@ -31,9 +31,9 @@ interface Role
      * @param int $id
      * @param string|null $guardName
      *
-     * @return \Modules\Permission\Contracts\Role
+     * @return \Modules\Cockpit\Permission\Contracts\Role
      *
-     * @throws \Modules\Permission\Exceptions\RoleDoesNotExist
+     * @throws \Modules\Cockpit\Permission\Exceptions\RoleDoesNotExist
      */
     public static function findById(int $id, $guardName): self;
 
@@ -43,14 +43,14 @@ interface Role
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Modules\Permission\Contracts\Role
+     * @return \Modules\Cockpit\Permission\Contracts\Role
      */
-    public static function findOrCreate(string $name, $guardName): self;
+    public static function findOrCreate(string $name, $display_name, $guardName): self;
 
     /**
      * Determine if the user may perform the given permission.
      *
-     * @param string|\Modules\Permission\Contracts\Permission $permission
+     * @param string|\Modules\Cockpit\Permission\Contracts\Permission $permission
      *
      * @return bool
      */

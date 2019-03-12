@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\Permission\Models;
+namespace Modules\Cockpit\Permission\Models;
 
-use Modules\Permission\Guard;
+use Modules\Cockpit\Permission\Guard;
 use Illuminate\Support\Collection;
-use Modules\Permission\Traits\HasRoles;
+use Modules\Cockpit\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Permission\PermissionRegistrar;
-use Modules\Permission\Traits\RefreshesPermissionCache;
+use Modules\Cockpit\Permission\PermissionRegistrar;
+use Modules\Cockpit\Permission\Traits\RefreshesPermissionCache;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Modules\Permission\Exceptions\PermissionDoesNotExist;
+use Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Modules\Permission\Exceptions\PermissionAlreadyExists;
-use Modules\Permission\Contracts\Permission as PermissionContract;
+use Modules\Cockpit\Permission\Exceptions\PermissionAlreadyExists;
+use Modules\Cockpit\Permission\Contracts\Permission as PermissionContract;
 
 class Permission extends Model implements PermissionContract
 {
@@ -80,9 +80,9 @@ class Permission extends Model implements PermissionContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @throws \Modules\Permission\Exceptions\PermissionDoesNotExist
+     * @throws \Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist
      *
-     * @return \Modules\Permission\Contracts\Permission
+     * @return \Modules\Cockpit\Permission\Contracts\Permission
      */
     public static function findByName(string $name, $guardName = null): PermissionContract
     {
@@ -101,9 +101,9 @@ class Permission extends Model implements PermissionContract
      * @param int $id
      * @param string|null $guardName
      *
-     * @throws \Modules\Permission\Exceptions\PermissionDoesNotExist
+     * @throws \Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist
      *
-     * @return \Modules\Permission\Contracts\Permission
+     * @return \Modules\Cockpit\Permission\Contracts\Permission
      */
     public static function findById(int $id, $guardName = null): PermissionContract
     {
@@ -123,15 +123,15 @@ class Permission extends Model implements PermissionContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Modules\Permission\Contracts\Permission
+     * @return \Modules\Cockpit\Permission\Contracts\Permission
      */
-    public static function findOrCreate(string $name, $guardName = null): PermissionContract
+    public static function findOrCreate(string $name, $display_name , $type = 'team', $guardName = null): PermissionContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
-        $permission = static::getPermissions(['name' => $name, 'guard_name' => $guardName])->first();
+        $permission = static::getPermissions(['name' => $name, 'guard_name' => $guardName, 'type' => $type])->first();
 
         if (! $permission) {
-            return static::query()->create(['name' => $name, 'guard_name' => $guardName]);
+            return static::query()->create(['name' => $name, 'guard_name' => $guardName , 'type' => $type , 'display_name' => $display_name]);
         }
 
         return $permission;

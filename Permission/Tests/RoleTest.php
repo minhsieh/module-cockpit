@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
-use Modules\Permission\Contracts\Role;
-use Modules\Permission\Models\Permission;
-use Modules\Permission\Exceptions\RoleDoesNotExist;
-use Modules\Permission\Exceptions\GuardDoesNotMatch;
-use Modules\Permission\Exceptions\RoleAlreadyExists;
-use Modules\Permission\Exceptions\PermissionDoesNotExist;
+use Modules\Cockpit\Permission\Contracts\Role;
+use Modules\Cockpit\Permission\Models\Permission;
+use Modules\Cockpit\Permission\Exceptions\RoleDoesNotExist;
+use Modules\Cockpit\Permission\Exceptions\GuardDoesNotMatch;
+use Modules\Cockpit\Permission\Exceptions\RoleAlreadyExists;
+use Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist;
 
 class RoleTest extends TestCase
 {

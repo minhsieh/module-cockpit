@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
-use Modules\Permission\Models\Permission;
+use Modules\Cockpit\Permission\Models\Permission;
 
 class MultipleGuardsTest extends TestCase
 {

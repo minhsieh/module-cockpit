@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Permission\Commands;
+namespace Modules\Cockpit\Permission\Commands;
 
 use Illuminate\Console\Command;
-use Modules\Permission\Contracts\Role as RoleContract;
-use Modules\Permission\Contracts\Permission as PermissionContract;
+use Modules\Cockpit\Permission\Contracts\Role as RoleContract;
+use Modules\Cockpit\Permission\Contracts\Permission as PermissionContract;
 
 class CreateRole extends Command
 {

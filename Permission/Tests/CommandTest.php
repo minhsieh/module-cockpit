@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
-use Modules\Permission\Models\Role;
+use Modules\Cockpit\Permission\Models\Role;
 use Illuminate\Support\Facades\Artisan;
-use Modules\Permission\Models\Permission;
+use Modules\Cockpit\Permission\Models\Permission;
 
 class CommandTest extends TestCase
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Permission\Models;
+namespace Modules\Cockpit\Permission\Models;
 
-use Modules\Permission\Guard;
+use Modules\Cockpit\Permission\Guard;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Permission\Traits\HasPermissions;
-use Modules\Permission\Exceptions\RoleDoesNotExist;
-use Modules\Permission\Exceptions\GuardDoesNotMatch;
-use Modules\Permission\Exceptions\RoleAlreadyExists;
-use Modules\Permission\Contracts\Role as RoleContract;
-use Modules\Permission\Traits\RefreshesPermissionCache;
+use Modules\Cockpit\Permission\Traits\HasPermissions;
+use Modules\Cockpit\Permission\Exceptions\RoleDoesNotExist;
+use Modules\Cockpit\Permission\Exceptions\GuardDoesNotMatch;
+use Modules\Cockpit\Permission\Exceptions\RoleAlreadyExists;
+use Modules\Cockpit\Permission\Contracts\Role as RoleContract;
+use Modules\Cockpit\Permission\Traits\RefreshesPermissionCache;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -33,7 +33,7 @@ class Role extends Model implements RoleContract
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? Guard::getDefaultName(static::class);
 
-        if (static::where('name', $attributes['name'])->where('guard_name', $attributes['guard_name'])->where('com_id',$attributes['com_id'])->first()) {
+        if (static::where('name', $attributes['name'])->where('guard_name', $attributes['guard_name'])->first()) {
             throw RoleAlreadyExists::create($attributes['name'], $attributes['guard_name']);
         }
 
@@ -77,9 +77,9 @@ class Role extends Model implements RoleContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Modules\Permission\Contracts\Role|\Modules\Permission\Models\Role
+     * @return \Modules\Cockpit\Permission\Contracts\Role|\Modules\Cockpit\Permission\Models\Role
      *
-     * @throws \Modules\Permission\Exceptions\RoleDoesNotExist
+     * @throws \Modules\Cockpit\Permission\Exceptions\RoleDoesNotExist
      */
     public static function findByName(string $name, $guardName = null , $com_id = null): RoleContract
     {
@@ -113,16 +113,16 @@ class Role extends Model implements RoleContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Modules\Permission\Contracts\Role
+     * @return \Modules\Cockpit\Permission\Contracts\Role
      */
-    public static function findOrCreate(string $name, $guardName = null): RoleContract
+    public static function findOrCreate(string $name, $display_name = null ,$guardName = null): RoleContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
 
         $role = static::where('name', $name)->where('guard_name', $guardName)->first();
 
         if (! $role) {
-            return static::query()->create(['name' => $name, 'guard_name' => $guardName]);
+            return static::query()->create(['name' => $name, 'guard_name' => $guardName , 'display_name' => $display_name]);
         }
 
         return $role;
@@ -135,7 +135,7 @@ class Role extends Model implements RoleContract
      *
      * @return bool
      *
-     * @throws \Modules\Permission\Exceptions\GuardDoesNotMatch
+     * @throws \Modules\Cockpit\Permission\Exceptions\GuardDoesNotMatch
      */
     public function hasPermissionTo($permission): bool
     {

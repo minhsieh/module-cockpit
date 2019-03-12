@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\Permission;
+namespace Modules\Cockpit\Permission;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Collection;
-use Modules\Permission\Contracts\Role;
+use Modules\Cockpit\Permission\Contracts\Role;
 use Illuminate\Contracts\Auth\Access\Gate;
-use Modules\Permission\Contracts\Permission;
+use Modules\Cockpit\Permission\Contracts\Permission;
 use Illuminate\Contracts\Auth\Access\Authorizable;
-use Modules\Permission\Exceptions\PermissionDoesNotExist;
+use Modules\Cockpit\Permission\Exceptions\PermissionDoesNotExist;
 
 class PermissionRegistrar
 {
@@ -147,7 +147,7 @@ class PermissionRegistrar
     /**
      * Get an instance of the permission class.
      *
-     * @return \Modules\Permission\Contracts\Permission
+     * @return \Modules\Cockpit\Permission\Contracts\Permission
      */
     public function getPermissionClass(): Permission
     {
@@ -157,7 +157,7 @@ class PermissionRegistrar
     /**
      * Get an instance of the role class.
      *
-     * @return \Modules\Permission\Contracts\Role
+     * @return \Modules\Cockpit\Permission\Contracts\Role
      */
     public function getRoleClass(): Role
     {

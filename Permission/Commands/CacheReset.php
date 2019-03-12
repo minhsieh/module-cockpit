@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Permission\Commands;
+namespace Modules\Cockpit\Permission\Commands;
 
 use Illuminate\Console\Command;
-use Modules\Permission\PermissionRegistrar;
+use Modules\Cockpit\Permission\PermissionRegistrar;
 
 class CacheReset extends Command
 {

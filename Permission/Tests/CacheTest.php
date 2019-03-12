@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
 use Illuminate\Support\Facades\DB;
-use Modules\Permission\Contracts\Role;
+use Modules\Cockpit\Permission\Contracts\Role;
 use Illuminate\Support\Facades\Artisan;
-use Modules\Permission\PermissionRegistrar;
-use Modules\Permission\Contracts\Permission;
+use Modules\Cockpit\Permission\PermissionRegistrar;
+use Modules\Cockpit\Permission\Contracts\Permission;
 
 class CacheTest extends TestCase
 {
@@ -172,7 +172,7 @@ class CacheTest extends TestCase
     public function it_can_reset_the_cache_with_artisan_command()
     {
         Artisan::call('permission:create-permission', ['name' => 'new-permission']);
-        $this->assertCount(1, \Modules\Permission\Models\Permission::where('name', 'new-permission')->get());
+        $this->assertCount(1, \Modules\Cockpit\Permission\Models\Permission::where('name', 'new-permission')->get());
 
         $this->resetQueryCount();
         // retrieve permissions, and assert that the cache had to be loaded

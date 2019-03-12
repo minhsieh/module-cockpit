@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\Permission\Test;
+namespace Modules\Cockpit\Permission\Test;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Modules\Permission\Middlewares\RoleMiddleware;
-use Modules\Permission\Exceptions\UnauthorizedException;
-use Modules\Permission\Middlewares\PermissionMiddleware;
-use Modules\Permission\Middlewares\RoleOrPermissionMiddleware;
+use Modules\Cockpit\Permission\Middlewares\RoleMiddleware;
+use Modules\Cockpit\Permission\Exceptions\UnauthorizedException;
+use Modules\Cockpit\Permission\Middlewares\PermissionMiddleware;
+use Modules\Cockpit\Permission\Middlewares\RoleOrPermissionMiddleware;
 
 class MiddlewareTest extends TestCase
 {

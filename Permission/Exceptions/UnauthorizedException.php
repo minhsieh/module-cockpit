@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Exceptions;
+namespace Modules\Cockpit\Permission\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

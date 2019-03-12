@@ -18,5 +18,6 @@ class CockpitDatabaseSeeder extends Seeder
 
         $this->call(TeamTableSeeder::class);
         $this->call(UserTableSeeder::class);
+        $this->call(PermissionTableSeeder::class);
     }
 }

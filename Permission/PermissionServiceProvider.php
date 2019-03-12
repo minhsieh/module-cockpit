@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\Permission;
+namespace Modules\Cockpit\Permission;
 
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use Modules\Permission\Contracts\Role as RoleContract;
-use Modules\Permission\Contracts\Permission as PermissionContract;
+use Modules\Cockpit\Permission\Contracts\Role as RoleContract;
+use Modules\Cockpit\Permission\Contracts\Permission as PermissionContract;
 
 class PermissionServiceProvider extends ServiceProvider
 {
