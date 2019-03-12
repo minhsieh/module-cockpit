@@ -48,8 +48,14 @@ class CockpitServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../Config/config.php' => config_path('cockpit.php'),
         ], 'config');
+        $this->publishes([
+            __DIR__.'/../Config/permission.php' => config_path('permission.php'),
+        ], 'config');
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'cockpit'
+        );
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/permission.php', 'permission'
         );
     }
 
@@ -99,6 +105,13 @@ class CockpitServiceProvider extends ServiceProvider
         if (! app()->environment('production')) {
             app(Factory::class)->load(__DIR__ . '/../Database/factories');
         }
+    }
+
+    public function registerAssets()
+    {
+        $this->publishes([
+            __DIR__.'/../Resources/assets/cockpit' => public_path('vendor/cockpit'),
+        ], 'public');
     }
 
     /**

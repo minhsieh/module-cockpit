@@ -1,4 +1,4 @@
-@extends('layouts.mauth')
+@extends('cockpit::layouts.mauth')
 
 @section('content')
     <!-- BEGIN FORGOT PASSWORD FORM -->
