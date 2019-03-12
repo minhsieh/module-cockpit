@@ -13,4 +13,10 @@
 
 Route::prefix('cockpit')->group(function() {
     Route::get('/', 'CockpitController@index');
+    Route::auth();
+    Route::get('logout', function(){
+        Auth::logout();
+        return redirect('/cockpit');
+    });
 });
+

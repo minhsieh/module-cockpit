@@ -16,6 +16,7 @@ class CockpitDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(MakeCockpitCoreSeedTableSeeder::class);
+        $this->call(TeamTableSeeder::class);
+        $this->call(UserTableSeeder::class);
     }
 }

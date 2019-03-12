@@ -15,7 +15,7 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tid')->index()->comment('代碼');
+            $table->string('tid')->unique()->comment('代碼');
             $table->string('name')->comment('名稱');
             $table->boolean('is_active')->comment('是否啟用');
             $table->string('contact')->nullable()->comment('聯絡人');

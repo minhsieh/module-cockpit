@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Cockpit\Entities\Team;
 
-class MakeCockpitCoreSeedTableSeeder extends Seeder
+class TeamTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,7 +19,7 @@ class MakeCockpitCoreSeedTableSeeder extends Seeder
 
         // $this->call("OthersTableSeeder");
 
-        Team::create([
+        Team::firstOrCreate([
             'tid' => 'main',
             'name' => '主要測試團隊',
             'is_active' => 1,
@@ -29,7 +29,7 @@ class MakeCockpitCoreSeedTableSeeder extends Seeder
             'remark' => 'This is a test remark'
         ]);
 
-        Team::create([
+        Team::firstOrCreate([
             'tid' => 'aaa',
             'name' => '喔賣科技有限公司',
             'is_active' => 1,
@@ -39,7 +39,7 @@ class MakeCockpitCoreSeedTableSeeder extends Seeder
             'remark' => 'This is a test remark'
         ]);
 
-        Team::create([
+        Team::firstOrCreate([
             'tid' => 'bbb',
             'name' => '超極股份有限公司',
             'is_active' => 1,
