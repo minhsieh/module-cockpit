@@ -107,13 +107,6 @@ class CockpitServiceProvider extends ServiceProvider
         }
     }
 
-    public function registerAssets()
-    {
-        $this->publishes([
-            __DIR__.'/../Resources/assets/cockpit' => public_path('vendor/cockpit'),
-        ], 'public');
-    }
-
     /**
      * Get the services provided by the provider.
      *
