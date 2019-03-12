@@ -4,12 +4,12 @@ namespace Modules\Cockpit\Entities;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-//use Spatie\Permission\Traits\HasRoles as HasRoles;
+use Modules\Permission\Traits\HasRoles as HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    //use HasRoles;
+    use HasRoles;
 
     protected $fillable = [
         'name',

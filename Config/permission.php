@@ -13,7 +13,7 @@ return [
          * `Minhsieh\CockpitPermission\Contracts\Permission` contract.
          */
 
-        'permission' => Minhsieh\CockpitPermission\Models\Permission::class,
+        'permission' => Modules\Permission\Models\Permission::class,
 
         /*
          * When using the "HasRoles" trait from this package, we need to know which
@@ -24,7 +24,7 @@ return [
          * `Minhsieh\CockpitPermission\Contracts\Role` contract.
          */
 
-        'role' => Minhsieh\CockpitPermission\Models\Role::class,
+        'role' => Modules\Permission\Models\Role::class,
 
     ],
 
