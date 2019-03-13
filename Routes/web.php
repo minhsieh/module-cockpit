@@ -21,6 +21,7 @@ Route::prefix('cockpit')->group(function() {
 
     Route::prefix('admin')->group(function() {
         Route::get('/' , 'Admin\IndexController@index');
+        Route::resource('users','Admin\UserController');
     });
 });
 
