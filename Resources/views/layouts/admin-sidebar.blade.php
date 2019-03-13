@@ -54,6 +54,17 @@
             </li>
             <!-- 管理團隊 End-->
             @endcan
+
+            @can('manage_logs')
+            <!-- Log查看 Start-->
+            <li class="nav-item">
+                <a href="{{ url('cockpit/admin/logs') }}" class="nav-link">
+                    <i class="icon-calendar"></i>
+                    <span class="title">查看Log</span>
+                </a>
+            </li>
+            <!-- Log查看 End-->
+            @endcan
             
         </ul>
         <!-- END SIDEBAR MENU -->

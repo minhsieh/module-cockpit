@@ -57,6 +57,9 @@ class CockpitServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../Config/permission.php', 'permission'
         );
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/logviewer.php', 'logviewer'
+        );
     }
 
     /**

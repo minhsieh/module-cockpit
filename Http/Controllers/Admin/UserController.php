@@ -17,12 +17,11 @@ class UserController extends Controller
     function __construct()
     {
         $this->middleware(['permission:manage_users']);
-        
     }
 
     public function index()
     {
-        $users = User::latest()->paginate(20);
+        $users = User::orderBy('updated_at','DESC')->paginate(20);
         $i = (request()->input('page', 1) - 1) * 20;
         return view($this->view_path.'.index',compact('users'))->with('i', $i);
     }
