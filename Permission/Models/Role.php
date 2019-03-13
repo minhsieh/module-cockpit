@@ -20,6 +20,16 @@ class Role extends Model implements RoleContract
 
     public $guarded = ['id'];
 
+    public static $rules = [
+        'name' => 'required|string',
+        'display_name' => 'required|string',
+    ];
+
+    public static $attrs = [
+        'name' => '名稱',
+        'display_name' => '顯示名稱',
+    ];
+
     public function __construct(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? config('auth.defaults.guard');

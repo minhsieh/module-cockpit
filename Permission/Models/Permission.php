@@ -20,6 +20,18 @@ class Permission extends Model implements PermissionContract
     use RefreshesPermissionCache;
 
     public $guarded = ['id'];
+    
+    public static $rules = [
+        'name' => 'required|string',
+        'display_name' => 'required|string',
+        'type' => 'required|string'
+    ];
+
+    public static $attrs = [
+        'name' => '名稱',
+        'display_name' => '顯示名稱',
+        'type' => '類型'
+    ];
 
     public function __construct(array $attributes = [])
     {
@@ -38,10 +50,6 @@ class Permission extends Model implements PermissionContract
 
         if ($permission) {
             throw PermissionAlreadyExists::create($attributes['name'], $attributes['guard_name']);
-        }
-
-        if (isNotLumen() && app()::VERSION < '5.4') {
-            return parent::create($attributes);
         }
 
         return static::query()->create($attributes);

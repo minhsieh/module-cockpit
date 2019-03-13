@@ -23,6 +23,8 @@ Route::prefix('cockpit')->group(function() {
         Route::get('/' , 'Admin\IndexController@index');
         Route::resource('users','Admin\UserController');
         Route::resource('teams','Admin\TeamController');
+        Route::resource('permissions','Admin\PermissionController');
+        Route::resource('roles','Admin\RoleController');
         Route::get('logs','Admin\LogViewerController@index');
     });
 

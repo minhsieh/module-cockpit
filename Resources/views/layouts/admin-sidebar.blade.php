@@ -38,7 +38,7 @@
             <li class="nav-item">
                 <a href="{{ url('cockpit/admin/users') }}" class="nav-link">
                     <i class="icon-user"></i>
-                    <span class="title">使用者</span>
+                    <span class="title">使用者 User</span>
                 </a>
             </li>
             <!-- 管理使用者 End-->
@@ -49,10 +49,32 @@
             <li class="nav-item">
                 <a href="{{ url('cockpit/admin/teams') }}" class="nav-link">
                     <i class="icon-users"></i>
-                    <span class="title">團隊</span>
+                    <span class="title">團隊 Team</span>
                 </a>
             </li>
             <!-- 管理團隊 End-->
+            @endcan
+
+            @can('manage_permissions')
+            <!-- 管理權限 Start-->
+            <li class="nav-item">
+                <a href="{{ url('cockpit/admin/permissions') }}" class="nav-link">
+                    <i class="icon-shield"></i>
+                    <span class="title">權限 Permission</span>
+                </a>
+            </li>
+            <!-- 管理權限 End-->
+            @endcan
+
+            @can('manage_roles')
+            <!-- 管理權限 Start-->
+            <li class="nav-item">
+                <a href="{{ url('cockpit/admin/roles') }}" class="nav-link">
+                    <i class="icon-badge"></i>
+                    <span class="title">角色 Role</span>
+                </a>
+            </li>
+            <!-- 管理權限 End-->
             @endcan
 
             @can('manage_logs')
@@ -60,7 +82,7 @@
             <li class="nav-item">
                 <a href="{{ url('cockpit/admin/logs') }}" class="nav-link">
                     <i class="icon-calendar"></i>
-                    <span class="title">查看Log</span>
+                    <span class="title">紀錄 Log</span>
                 </a>
             </li>
             <!-- Log查看 End-->

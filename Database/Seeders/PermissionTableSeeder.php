@@ -27,6 +27,8 @@ class PermissionTableSeeder extends Seeder
         $admin_perms[] = Permission::findOrCreate('manage_users','中控-管理所有使用者','admin');
         $admin_perms[] = Permission::findOrCreate('manage_teams','中控-管理所有團隊','admin');
         $admin_perms[] = Permission::findOrCreate('manage_logs','中控-查看Log','admin');
+        $admin_perms[] = Permission::findOrCreate('manage_permissions','中控-管理所有權限','admin');
+        $admin_perms[] = Permission::findOrCreate('manage_roles','中控-管理所有角色','admin');
         
         // Create default Team using permissions
         $team_perms[] = Permission::findOrCreate('manage_team_users','管理所有使用者','team');
