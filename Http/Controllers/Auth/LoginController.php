@@ -60,6 +60,10 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        if($user->hasRole('superadmin')){
+            return redirect('cockpit/admin');
+        }
+
         $user->last_login = date('Y-m-d H:i:s');
         $user->save();
     }
