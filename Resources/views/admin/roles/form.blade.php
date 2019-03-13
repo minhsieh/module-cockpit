@@ -64,6 +64,31 @@
                                     <input name="display_name" type="text" class="form-control" value="{{ old('display_name', $role->display_name ?? null) }}">
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Permissions<span class="required" aria-required="true"> * </span></label>
+                                <div class="col-md-3">
+                                    <div class="mt-checkbox-list">
+                                        @foreach($permissions as $group_k => $group)
+                                            <h3>{{ $group_k }}</h5>
+                                            @foreach($group as $permission)
+                                                <label class="mt-checkbox">
+                                                    <input  type="checkbox" 
+                                                            name="permissions[]" 
+                                                            value="{{ $permission['name'] }}"
+                                                            @if(is_array(old('permissions')) && in_array($permission['name'] , old('permissions')))
+                                                            checked
+                                                            @elseif(isset($role->permissions) && $role->permissions->contains('name' , $permission['name']))
+                                                            checked 
+                                                            @endif
+                                                            > {{ $permission['display_name'] }}
+                                                    <span></span>
+                                                </label>
+                                            @endforeach
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane" id="adv">
                             

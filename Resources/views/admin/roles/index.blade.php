@@ -53,6 +53,7 @@
                                 <th>id</th>
                                 <th>Name</th>
                                 <th>Display Name</th>
+                                <th>權限數</th>
                                 <th>Guard</th>
                                 <th>動作</th>
                             </tr>
@@ -66,6 +67,13 @@
                                 <td>{{$role->id}}</td>
                                 <td>{{$role->name}}</td>
                                 <td>{{$role->display_name}}</td>
+                                <td>
+                                    @if(($per_count = count($role->permissions)) == 0)
+                                    <span class="label label-sm label-default"> 無 </span>
+                                    @else
+                                    <span class="label label-sm label-success"> {{ $per_count }} </span>
+                                    @endif
+                                </td>
                                 <td>{{$role->guard_name}}</td>
                                 <td>
                                     <div class="btn-group">

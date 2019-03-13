@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Modules\Cockpit\Permission\Models\Role;
+use Modules\Cockpit\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -33,7 +34,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view($this->view_path.'.form',['form_type' => 'create']);
+        $permissions = Permission::all()->groupBy('type')->toArray();
+        return view($this->view_path.'.form',['form_type' => 'create', 'permissions' => $permissions]);
     }
 
     /**
@@ -44,7 +46,11 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), Role::$rules);
+        $rules = Role::$rules;
+        $rules['name'] = $rules['name']."|unique:".config('permission.table_names.roles');
+
+        $validator = Validator::make($request->all(), $rules);
+
         $validator->setAttributeNames(Role::$attrs);
 
         if ($validator->fails()) {
@@ -52,8 +58,11 @@ class RoleController extends Controller
         }
 
         $data = $request->all();
+        unset($data['permissions']);
+
         try{
-            Role::create($data);
+            $role = Role::create($data);
+            $role->syncPermissions($request->input('permissions'));
         }catch(Illuminate\Database\QueryException $e){
             
         }
@@ -82,7 +91,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view($this->view_path.'.form',['role' => $role, 'form_type' => 'edit']);
+        $permissions = Permission::all()->groupBy('type')->toArray();
+        return view($this->view_path.'.form',['role' => $role, 'form_type' => 'edit', 'permissions' => $permissions]);
     }
 
 
@@ -104,9 +114,11 @@ class RoleController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        
+        unset($input['permissions']);
+
         try{
             $role->update($input);
+            $role->syncPermissions($request->input('permissions'));
         }catch(\Illuminate\Database\QueryException $e){
             $validator = Validator::make([],[]);
             $validator->errors()->add("","資料庫更新失敗");
