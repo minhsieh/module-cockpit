@@ -8,23 +8,23 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Modules\Cockpit\Entities\User;
+use Modules\Cockpit\Entities\Team;
 
-class UserController extends Controller
+class TeamController extends Controller
 {
-    protected $view_path = 'cockpit::admin.users';
+    protected $view_path = 'cockpit::admin.teams';
 
     function __construct()
     {
-        $this->middleware(['permission:manage_users']);
+        $this->middleware(['permission:manage_teams']);
         
     }
 
     public function index()
     {
-        $users = User::latest()->paginate(20);
+        $teams = Team::latest()->paginate(20);
         $i = (request()->input('page', 1) - 1) * 20;
-        return view($this->view_path.'.index',compact('users'))->with('i', $i);
+        return view($this->view_path.'.index',compact('teams'))->with('i', $i);
     }
 
     /**
@@ -45,8 +45,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), User::$rules);
-        $validator->setAttributeNames(User::$attrs);
+        
+        $validator = Validator::make($request->all(), Team::$rules);
+        $validator->setAttributeNames(Team::$attrs);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -56,14 +57,13 @@ class UserController extends Controller
 
         $data['is_active'] = (!empty($data['is_active']) && $data['is_active'] == 'on')? true : false;
 
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'is_active' => $data['is_active'],
-        ]);
+        try{
+            Team::create($data);
+        }catch(Illuminate\Database\QueryException $e){
+            
+        }
 
-        return redirect()->action('Admin\UserController@index')->with('success','User created successfully.');
+        return redirect()->action('Admin\TeamController@index')->with('success','Team created successfully.');
     }
 
 
@@ -73,9 +73,9 @@ class UserController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Team $team)
     {
-        return view($this->view_path.'.show',compact('user'));
+        return view($this->view_path.'.show',compact('team'));
     }
 
 
@@ -85,9 +85,9 @@ class UserController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Team $team)
     {
-        return view($this->view_path.'.form',['user' => $user, 'form_type' => 'edit']);
+        return view($this->view_path.'.form',['team' => $team, 'form_type' => 'edit']);
     }
 
 
@@ -98,32 +98,32 @@ class UserController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Team $team)
     {
         $input = $request->all();
 
-        $update_rules = User::$rules;
-        $update_rules['email'] = $update_rules['email'] . ',NULL,' . $user->id.',id';
-        if(empty($request->input('password'))){
-            unset($update_rules['password']);
-            unset($input['password']);
-        }
+        $update_rules = Team::$rules;
+        $update_rules['tid'] = $update_rules['tid'] . ',NULL,' . $team->id.',id';
 
         $validator = Validator::make($input, $update_rules);
-        $validator->setAttributeNames(User::$attrs);
+        $validator->setAttributeNames(Team::$attrs);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        if(!empty($input['password'])){
-            $input['password'] = Hash::make($input['password']);
-        }
         $input['is_active'] = (!empty($input['is_active']) && $input['is_active'] == 'on')? true : false;
 
-        $user->update($input);
+        
+        try{
+            $team->update($input);
+        }catch(\Illuminate\Database\QueryException $e){
+            $validator = Validator::make([],[]);
+            $validator->errors()->add("","資料庫更新失敗");
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        return redirect()->action('Admin\UserController@index')->with('success','User updated successfully');
+        return redirect()->action('Admin\TeamController@index')->with('success','Team updated successfully');
     }
 
 
@@ -133,10 +133,10 @@ class UserController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Team $team)
     {
-        $user->delete();
+        $team->delete();
 
-        return redirect()->action('Admin\UserController@index')->with('success','User deleted successfully');
+        return redirect()->action('Admin\TeamController@index')->with('success','Team deleted successfully');
     }
 }

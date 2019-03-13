@@ -27,49 +27,34 @@
                 <h3 class="uppercase">Features</h3>
             </li>
             <li class="nav-item start ">
-                <a href="{{ url('dashboard') }}" class="nav-link">
+                <a href="{{ url('cockpit/admin') }}" class="nav-link">
                     <i class="icon-home"></i>
-                    <span class="title">主頁</span>
+                    <span class="title">管理主頁</span>
                 </a>
             </li>
+
+            @can('manage_users')
+            <!-- 管理使用者 Start-->
             <li class="nav-item">
-                <a href="" class="nav-link">
-                    <i class="icon-earphones-alt"></i>
-                    <span class="title">管理介面</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="javascript:;" class="nav-link">
-                    <i class="icon-bar-chart"></i>
-                    <span class="title">統計報表</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link nav-toggle">
-                    <i class="icon-wallet"></i>
-                    <span class="title">資料管理</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <span class="title">裝修材料管理</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <span class="title">門窗資料管理</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            
-            <li class="nav-item  ">
-                <a href="" class="nav-link">
+                <a href="{{ url('cockpit/admin/users') }}" class="nav-link">
                     <i class="icon-user"></i>
-                    <span class="title">使用者管理</span>
+                    <span class="title">使用者</span>
                 </a>
             </li>
+            <!-- 管理使用者 End-->
+            @endcan
+
+            @can('manage_teams')
+            <!-- 管理團隊 Start-->
+            <li class="nav-item">
+                <a href="{{ url('cockpit/admin/teams') }}" class="nav-link">
+                    <i class="icon-users"></i>
+                    <span class="title">團隊</span>
+                </a>
+            </li>
+            <!-- 管理團隊 End-->
+            @endcan
+            
         </ul>
         <!-- END SIDEBAR MENU -->
         <!-- END SIDEBAR MENU -->

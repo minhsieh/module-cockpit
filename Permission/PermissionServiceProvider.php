@@ -14,7 +14,7 @@ class PermissionServiceProvider extends ServiceProvider
 {
     public function boot(PermissionRegistrar $permissionLoader, Filesystem $filesystem)
     {
-        if (isNotLumen()) {
+        //if (isNotLumen()) {
             $this->publishes([
                 __DIR__.'/../config/permission.php' => config_path('permission.php'),
             ], 'config');
@@ -26,7 +26,7 @@ class PermissionServiceProvider extends ServiceProvider
             if (app()->version() >= '5.5') {
                 $this->registerMacroHelpers();
             }
-        }
+        //}
 
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -47,12 +47,10 @@ class PermissionServiceProvider extends ServiceProvider
 
     public function register()
     {
-        if (isNotLumen()) {
-            $this->mergeConfigFrom(
-                __DIR__.'/../config/permission.php',
-                'permission'
-            );
-        }
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/permission.php',
+            'permission'
+        );
 
         $this->registerBladeExtensions();
     }
