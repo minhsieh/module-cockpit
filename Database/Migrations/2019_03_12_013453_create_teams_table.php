@@ -17,6 +17,7 @@ class CreateTeamsTable extends Migration
             $table->increments('id');
             $table->string('tid')->unique()->comment('代碼');
             $table->string('name')->comment('名稱');
+            $table->integer( 'owner_id' )->unsigned()->nullable();
             $table->boolean('is_active')->comment('是否啟用');
             $table->string('contact')->nullable()->comment('聯絡人');
             $table->string('tel')->nullable()->comment('聯絡電話');

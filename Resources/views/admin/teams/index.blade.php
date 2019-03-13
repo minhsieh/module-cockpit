@@ -65,8 +65,8 @@
                                 <td>
                                     <input type="checkbox" class="checkboxes ids" name="ids[]" value="{{$team->id}}"/>
                                 </td>
-                                <td>{{$team->tid}}</td>
-                                <td>{{$team->name}}</td>
+                                <td><a href="{{ route('teams.members.show' , $team->id) }}">{{ $team->tid }}</a></td>
+                                <td><a href="{{ route('teams.members.show' , $team->id) }}">{{ $team->name }}</a></td>
                                 <td>{{$team->contact}}</td>
                                 <td>{{$team->tel}}</td>
                                 <td>{{$team->email}}</td>

@@ -5,11 +5,13 @@ namespace Modules\Cockpit\Entities;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Cockpit\Permission\Traits\HasRoles as HasRoles;
+use Modules\Cockpit\Services\Teamwork\Traits\UserHasTeams as UserHasTeams;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use UserHasTeams;
 
     protected $fillable = [
         'name',

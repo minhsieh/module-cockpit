@@ -26,7 +26,16 @@ Route::prefix('cockpit')->group(function() {
         Route::resource('permissions','Admin\PermissionController');
         Route::resource('roles','Admin\RoleController');
         Route::get('logs','Admin\LogViewerController@index');
+
+        Route::get('teams/members/{id}', 'Admin\TeamMemberController@show')->name('teams.members.show');
+        Route::get('teams/members/resend/{invite_id}', 'Admin\TeamMemberController@resendInvite')->name('teams.members.resend_invite');
+        Route::post('teams/members/{id}', 'Admin\TeamMemberController@invite')->name('teams.members.invite');
+        Route::delete('teams/members/{id}/{user_id}', 'Admin\TeamMemberController@destroy')->name('teams.members.destroy');
+
+        //Route::get('teams/accept/{token}', 'Admin\AuthController@acceptInvite')->name('teams.accept_invite');
     });
+
+    Route::get('teams/invite/accept/{token}', 'Auth\TeamInviteController@acceptInvite');
 
     
 });
