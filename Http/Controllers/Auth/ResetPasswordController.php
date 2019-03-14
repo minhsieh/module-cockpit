@@ -34,7 +34,7 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('cockpit.guest');
     }
 
     public function showResetForm(Request $request, $token = null)

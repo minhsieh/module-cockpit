@@ -37,7 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('cockpit.guest')->except('logout');
     }
 
     public function showLoginForm()
@@ -66,5 +66,6 @@ class LoginController extends Controller
 
         $user->last_login = date('Y-m-d H:i:s');
         $user->save();
+        return redirect('cockpit');
     }
 }

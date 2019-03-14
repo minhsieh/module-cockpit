@@ -12,14 +12,26 @@
 */
 
 Route::prefix('cockpit')->group(function() {
+    // Index
     Route::get('/', 'CockpitController@index');
-    Route::auth();
+
+    // Auth Using Routes
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('cockpit::login');
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('logout', 'Auth\LoginController@logout');
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm');
+    Route::post('register', 'Auth\RegisterController@register');
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
     Route::get('logout', function(){
         Auth::logout();
         return redirect('/cockpit');
     });
 
-    Route::prefix('admin')->group(function() {
+    // Admin
+    Route::prefix('admin')->middleware('cockpit.auth')->group(function() {
         Route::get('/' , 'Admin\IndexController@index');
         Route::resource('users','Admin\UserController');
         Route::resource('teams','Admin\TeamController');
@@ -34,11 +46,8 @@ Route::prefix('cockpit')->group(function() {
         Route::delete('teams/members/{id}/{user_id}', 'Admin\TeamMemberController@destroy')->name('teams.members.destroy');
         Route::post('teams/members/{id}/add', 'Admin\TeamMemberController@addMember')->name('teams.members.addmember');
         Route::post('teams/members/{id}/setowner', 'Admin\TeamMemberController@setOwner')->name('teams.members.setowner');
-        
-
         //Route::get('teams/accept/{token}', 'Admin\AuthController@acceptInvite')->name('teams.accept_invite');
     });
-
     Route::get('teams/invite/accept/{token}', 'Auth\TeamInviteController@acceptInvite');
 
     

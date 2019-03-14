@@ -69,6 +69,14 @@ class CockpitServiceProvider extends ServiceProvider
         });
     }
 
+    protected function registerValuestore()
+    {
+        $this->app->bind('valuestore', function($app) {
+            $path = storage_path('cockpit/valuestore');
+            return \Modules\Cockpit\Services\Valuestore::make($path);
+        });
+    }
+
     /**
      * Register config.
      *
