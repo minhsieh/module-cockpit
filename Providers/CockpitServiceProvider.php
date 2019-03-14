@@ -27,6 +27,7 @@ class CockpitServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->registerTeamwork();
+        $this->registerParsedown();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
@@ -59,6 +60,13 @@ class CockpitServiceProvider extends ServiceProvider
                 \Modules\Cockpit\Services\Teamwork\Commands\MakeTeamwork::class,
             ]);
         }
+    }
+
+    protected function registerParsedown()
+    {
+        $this->app->bind('parsedown', function($app) {
+            return new \Modules\Cockpit\Services\Parsedown\Parsedown;
+        });
     }
 
     /**

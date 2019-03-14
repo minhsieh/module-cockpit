@@ -9,6 +9,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
+use Modules\Cockpit\Services\Teamwork\Events\UserJoinedTeam;
 
 trait TeamworkTeamTrait
 {
@@ -55,6 +56,25 @@ trait TeamworkTeamTrait
     public function hasUser( Model $user )
     {
         return $this->users()->where( $user->getKeyName(), "=", $user->getKey() )->first() ? true : false;
+    }
+
+    public function setOwner( Model $user )
+    {
+        if( !$user->teams->contains( $this ) )
+        {
+            $user->teams()->attach( $this->id );
+
+            event(new UserJoinedTeam($user, $this));
+
+            if( $this->relationLoaded('teams') ) {
+                $this->load('teams');
+            }
+        }
+
+        $this->owner_id = $user->id;
+        $this->save();
+
+        return $this;
     }
 
 }

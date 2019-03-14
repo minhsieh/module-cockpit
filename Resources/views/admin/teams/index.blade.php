@@ -52,9 +52,11 @@
                                 </th>
                                 <th>編號</th>
                                 <th>名稱</th>
+                                <th>Owner</th>
                                 <th>聯絡人</th>
                                 <th>電話</th>
                                 <th>Email</th>
+                                <th>團隊成員</th>
                                 <th>狀態</th>
                                 <th>動作</th>
                             </tr>
@@ -67,9 +69,17 @@
                                 </td>
                                 <td><a href="{{ route('teams.members.show' , $team->id) }}">{{ $team->tid }}</a></td>
                                 <td><a href="{{ route('teams.members.show' , $team->id) }}">{{ $team->name }}</a></td>
+                                <td>@if(isset($team->owner)){{ $team->owner->name }} @else <span class="label label-default">No Owner</span> @endif</td>
                                 <td>{{$team->contact}}</td>
                                 <td>{{$team->tel}}</td>
                                 <td>{{$team->email}}</td>
+                                <td>
+                                    @if($team->users->count() == 0)
+                                    <span class="label label-sm label-default"> 0 </span>
+                                    @else
+                                    <span class="label label-sm label-primary"> {{ $team->users->count() }} </span>
+                                    @endif
+                                </td>
                                 <td>
                                     @if($team->is_active)
                                     <span class="label label-sm label-success"> 正常 </span>
@@ -83,6 +93,9 @@
                                         動作 <i class="fa fa-angle-down"></i>
                                         </button>
                                         <ul class="dropdown-menu pull-right" role="menu">
+                                            <li>
+                                                <a href="{{ route('teams.members.show' , $team->id) }}"><i class="fa fa-eye"></i> 查看 </a>
+                                            </li>
                                             <li>
                                                 <a href="{{action('Admin\TeamController@edit',$team->id)}}"><i class="fa fa-pencil"></i> 編輯 </a>
                                             </li>

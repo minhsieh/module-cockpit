@@ -41,19 +41,57 @@ class TeamMemberController extends Controller
     {
         $teamModel = config('teamwork.team_model');
         $team = $teamModel::findOrFail($team_id);
-        if (!auth()->user()->isOwnerOfTeam($team)) {
+        if (!auth()->user()->isOwnerOfTeam($team) && !auth()->user()->hasPermissionTo('manage_teams')) {
             abort(403);
         }
 
         $userModel = config('teamwork.user_model');
         $user = $userModel::findOrFail($user_id);
-        if ($user->getKey() === auth()->user()->getKey()) {
-            abort(403);
+        if ($user->getKey() === auth()->user()->getKey() && !auth()->user()->hasPermissionTo('manage_teams') ) {
+            abort(404);
         }
 
         $user->detachTeam($team);
 
-        return redirect(action('Admin\TeamController@index'));
+
+        return redirect(action('Admin\TeamMemberController@show',$team->id))->with('success', 'Detach member "'.$user->name.'" from team "'.$team->name.'" success');
+    }
+
+    public function memberlist(Request $request)
+    {
+        $userModel = config('teamwork.user_model');
+
+        $search = $request->input('term');
+
+        $users = $userModel::select('id','name','email')->where('email','like',$search."%")->orWhere('name','like',$search."%")->paginate(10);
+
+        return response()->json($users,200);
+    }
+
+    public function addMember(Request $request, $team_id)
+    {
+        $teamModel = config('teamwork.team_model');
+        $team = $teamModel::findOrFail($team_id);
+        
+        $userModel = config('teamwork.user_model');
+        $user = $userModel::findOrFail($request->input('user_id'));
+
+        $user->attachTeam($team);
+
+        return redirect(route('teams.members.show',$team->id))->with('success', 'Add member "'.$user->name.'" to team "'.$team->name.'" success');
+    }
+
+    public function setOwner(Request $request, $team_id)
+    {
+        $teamModel = config('teamwork.team_model');
+        $team = $teamModel::findOrFail($team_id);
+        
+        $userModel = config('teamwork.user_model');
+        $user = $userModel::findOrFail($request->input('user_id'));
+
+        $team->setOwner($user);
+
+        return redirect(route('teams.members.show',$team->id))->with('success', 'Set member "'.$user->name.'" as team "'.$team->name.'" owner success');
     }
 
     /**
@@ -80,7 +118,7 @@ class TeamMemberController extends Controller
             ]);
         }
         
-        return redirect(action('Admin\TeamMemberController@show', $team->id));
+        return redirect(action('Admin\TeamMemberController@show', $team->id))->with('success', 'Invite "'.$request->email.' success');
     }
 
     /**
@@ -96,7 +134,7 @@ class TeamMemberController extends Controller
             $m->to($invite->email)->subject('Invitation to join team '.$invite->team->name);
         });
 
-        return redirect(action('Admin\TeamMemberController@show', $invite->team));
+        return redirect(action('Admin\TeamMemberController@show', $invite->team))->with('success', 'Resend invite "'.$request->email.' success');
     }
 
 }

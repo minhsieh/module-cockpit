@@ -3,9 +3,12 @@
 namespace Modules\Cockpit\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Cockpit\Services\Teamwork\Traits\TeamworkTeamTrait;
 
 class Team extends Model
 {
+    use TeamworkTeamTrait;
+
     protected $fillable = [
         'tid',
         'name',
