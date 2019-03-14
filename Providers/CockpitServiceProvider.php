@@ -4,6 +4,7 @@ namespace Modules\Cockpit\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Cockpit\Services\Teamwork\Teamwork;
 
 class CockpitServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,8 @@ class CockpitServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
+        $this->registerTeamwork();
+        $this->registerParsedown();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
@@ -36,6 +39,34 @@ class CockpitServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        
+    }
+
+    public function registerTeamwork()
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/teamwork.php', 'teamwork'
+        );
+        $this->app->bind('teamwork', function($app) {
+            return new Teamwork($app);
+        });
+        $this->app->booting(function()
+        {
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader->alias('Teamwork', '\Modules\Cockpit\Services\Teamwork\Facades\Teamwork');
+        });
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Modules\Cockpit\Services\Teamwork\Commands\MakeTeamwork::class,
+            ]);
+        }
+    }
+
+    protected function registerParsedown()
+    {
+        $this->app->bind('parsedown', function($app) {
+            return new \Modules\Cockpit\Services\Parsedown\Parsedown;
+        });
     }
 
     /**
@@ -60,6 +91,7 @@ class CockpitServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../Config/logviewer.php', 'logviewer'
         );
+        
     }
 
     /**
