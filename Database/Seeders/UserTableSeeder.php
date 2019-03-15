@@ -27,7 +27,7 @@ class UserTableSeeder extends Seeder
         $user->last_login = date("Y-m-d H:i:s");
         $user->save();
 
-        if ($this->app->environment() == 'local') {
+        if (app()->environment() == 'local') {
             $users = factory(User::class, 10)->create();
             foreach($users as $user){
                 echo "User seed:\t".$user->name."\t create success!".PHP_EOL;

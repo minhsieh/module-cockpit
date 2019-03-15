@@ -17,7 +17,7 @@ class TeamTableSeeder extends Seeder
     {
         Model::unguard();
 
-        if ($this->app->environment() == 'local') {
+        if (app()->environment() == 'local') {
             $teams = [
                 [
                     'tid' => 'main',
