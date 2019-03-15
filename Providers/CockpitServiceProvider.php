@@ -28,6 +28,7 @@ class CockpitServiceProvider extends ServiceProvider
         $this->registerFactories();
         $this->registerTeamwork();
         $this->registerParsedown();
+        $this->registerValuestore();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
@@ -71,8 +72,8 @@ class CockpitServiceProvider extends ServiceProvider
 
     protected function registerValuestore()
     {
-        $this->app->bind('valuestore', function($app) {
-            $path = storage_path('cockpit/valuestore');
+        $this->app->singleton('valuestore', function($app) {
+            $path = storage_path('cockpit/valuestore.json');
             return \Modules\Cockpit\Services\Valuestore::make($path);
         });
     }
