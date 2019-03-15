@@ -15,13 +15,13 @@ class PermissionServiceProvider extends ServiceProvider
     public function boot(PermissionRegistrar $permissionLoader, Filesystem $filesystem)
     {
         //if (isNotLumen()) {
-            $this->publishes([
-                __DIR__.'/../config/permission.php' => config_path('permission.php'),
-            ], 'config');
+            // $this->publishes([
+            //     __DIR__.'/../config/permission.php' => config_path('permission.php'),
+            // ], 'config');
 
-            $this->publishes([
-                __DIR__.'/../database/migrations/create_permission_tables.php.stub' => $this->getMigrationFileName($filesystem),
-            ], 'migrations');
+            // $this->publishes([
+            //     __DIR__.'/../database/migrations/create_permission_tables.php.stub' => $this->getMigrationFileName($filesystem),
+            // ], 'migrations');
 
             if (app()->version() >= '5.5') {
                 $this->registerMacroHelpers();
@@ -47,10 +47,10 @@ class PermissionServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/permission.php',
-            'permission'
-        );
+        // $this->mergeConfigFrom(
+        //     __DIR__.'/../config/permission.php',
+        //     'permission'
+        // );
 
         $this->registerBladeExtensions();
     }
