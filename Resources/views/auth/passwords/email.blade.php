@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- BEGIN FORGOT PASSWORD FORM -->
-    <form class="forget-form" action="{{ route('password.email') }}" method="post">
+    <form class="forget-form" action="{{ route('cockpit.password.email') }}" method="post">
         <h3 class="font-green">忘記密碼了嗎?11111</h3>
         @csrf
         @if (session('status'))
@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-actions">
-            <a type="button" id="back-btn" class="btn green btn-outline" href="{{ route('login') }}">返回</a>
+            <a type="button" id="back-btn" class="btn green btn-outline" href="{{ route('cockpit.login') }}">返回</a>
             <button type="submit" class="btn btn-success uppercase pull-right">送出</button>
         </div>
     </form>

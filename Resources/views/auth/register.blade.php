@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- BEGIN REGISTRATION FORM -->
-    <form class="register-form" action="{{ route('register') }}" method="post">
+    <form class="register-form" action="{{ route('cockpit.register') }}" method="post">
         @csrf
         <h3 class="font-green">{{ __('會員註冊11111') }}</h3>
         @if ($errors->any())
@@ -44,7 +44,7 @@
             <input class="form-control placeholder-no-fix" type="text" name="name"  value="{{old('name')}}"/>
         </div>
         <div class="form-actions">
-            <a type="button" id="register-back-btn" class="btn green btn-outline" href="{{ route('login') }}">返回</a>
+            <a type="button" id="register-back-btn" class="btn green btn-outline" href="{{ route('cockpit.login') }}">返回</a>
             <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">送出</button>
         </div>
     </form>

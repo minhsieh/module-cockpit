@@ -64,7 +64,7 @@
                                 <td>
                                     <input type="checkbox" class="checkboxes ids" name="ids[]" value="{{$user->id}}"/>
                                 </td>
-                                <td>{{$user->name}}</td>
+                                <td><a href="{{ action('Admin\UserController@show',$user->id) }}">{{$user->name}}</a></td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->last_login}}</td>
                                 <td>{{$user->created_at}}</td>

@@ -2,9 +2,9 @@
 
 @section('content')
     <!-- BEGIN LOGIN FORM -->
-    <form class="login-form" action="{{ route('login') }}" method="post">
+    <form class="login-form" action="{{ route('cockpit.login') }}" method="post">
         @csrf
-        <h3 class="form-title font-green">會員登入1111111</h3>
+        <h3 class="form-title font-green">Cockpit Login</h3>
         @if (session('registed-status'))
             <div class="alert alert-success alert-dismissable" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
@@ -39,11 +39,11 @@
                 <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}/>記住我
                 <span></span>
             </label>
-            <a href="{{ route('password.request') }}" id="forget-password" class="forget-password">忘記密碼</a>
+            <a href="{{ route('cockpit.password.request') }}" id="forget-password" class="forget-password">忘記密碼</a>
         </div>
         <div class="create-account">
             <p>
-                <a href="{{ route('register') }}" id="register-btn" class="uppercase">註冊新使用者</a>
+                <a href="{{ route('cockpit.register') }}" id="register-btn" class="uppercase">註冊新使用者</a>
             </p>
         </div>
     </form>

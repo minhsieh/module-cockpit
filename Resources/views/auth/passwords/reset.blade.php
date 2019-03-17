@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- BEGIN FORGOT PASSWORD FORM -->
-    <form class="reset-form" action="{{ route('password.request') }}" method="post">
+    <form class="reset-form" action="{{ route('cockpit.password.request') }}" method="post">
         <h3 class="font-green">重置新密碼11111</h3>
 
         @if ($errors->any())

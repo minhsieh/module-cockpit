@@ -16,7 +16,7 @@ class CockpitAuth extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('cockpit::login');
+            return route('cockpit.login');
         }
     }
 }
