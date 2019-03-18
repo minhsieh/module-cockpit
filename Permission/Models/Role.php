@@ -63,6 +63,12 @@ class Role extends Model implements RoleContract
         );
     }
 
+    public function teams()
+    {
+        return $this->belongsToMany('Modules\Cockpit\Entities\Team', 'team_roles', 'role_id', 'team_id');
+        //return $this->belongsToMany('Modules\Cockpit\Entities\Team')->using('Modules\Cockpit\Entities\TeamRole');
+    }
+
     /**
      * A role belongs to some users of the model associated with its guard.
      */

@@ -37,7 +37,7 @@ return [
     | the team if it is in a different namespace.
     |
     */
-    'team_model' => Modules\Cockpit\Services\Teamwork\TeamworkTeam::class,
+    'team_model' => Modules\Cockpit\Entities\Team::class,
 
     /*
     |--------------------------------------------------------------------------

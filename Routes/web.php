@@ -46,6 +46,11 @@ Route::prefix('cockpit')->name('cockpit.')->group(function() {
         Route::delete('teams/members/{id}/{user_id}', 'Admin\TeamMemberController@destroy')->name('teams.members.destroy');
         Route::post('teams/members/{id}/add', 'Admin\TeamMemberController@addMember')->name('teams.members.addmember');
         Route::post('teams/members/{id}/setowner', 'Admin\TeamMemberController@setOwner')->name('teams.members.setowner');
+        Route::get('teams/members/{id}/roles/add', 'Admin\TeamMemberController@addRole')->name('teams.members.addrole');
+        Route::post('teams/members/{id}/roles/store', 'Admin\TeamMemberController@storeRole')->name('teams.members.storerole');
+        Route::get('teams/members/{id}/roles/{role_id}','Admin\TeamMemberController@editRole')->name('teams.members.editrole');
+        Route::put('teams/members/{id}/roles/{role_id}/update','Admin\TeamMemberController@updateRole')->name('teams.members.updaterole');
+        Route::delete('teams/members/{id}/roles/{role_id}/delete','Admin\TeamMemberController@deleteRole')->name('teams.members.deleterole');
         //Route::get('teams/accept/{token}', 'Admin\AuthController@acceptInvite')->name('teams.accept_invite');
     });
     Route::get('teams/invite/accept/{token}', 'Auth\TeamInviteController@acceptInvite');

@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
                         Members of team "{{$team->name}}"
-                        <a href="{{route('teams.index')}}" class="btn btn-sm btn-default pull-right">
+                        <a href="{{route('cockpit.teams.index')}}" class="btn btn-sm btn-default pull-right">
                             <i class="fa fa-arrow-left"></i> Back
                         </a>
                     </div>
@@ -25,7 +25,7 @@
                                     <td>
                                         @if(auth()->user()->isOwnerOfTeam($team))
                                             @if(auth()->user()->getKey() !== $user->getKey())
-                                                <form style="display: inline-block;" action="{{route('teams.members.destroy', [$team, $user])}}" method="post">
+                                                <form style="display: inline-block;" action="{{route('cockpit.teams.members.destroy', [$team, $user])}}" method="post">
                                                     {!! csrf_field() !!}
                                                     <input type="hidden" name="_method" value="DELETE" />
                                                     <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
@@ -52,7 +52,7 @@
                                 <tr>
                                     <td>{{$invite->email}}</td>
                                     <td>
-                                        <a href="{{route('teams.members.resend_invite', $invite)}}" class="btn btn-sm btn-default">
+                                        <a href="{{route('cockpit.teams.members.resend_invite', $invite)}}" class="btn btn-sm btn-default">
                                             <i class="fa fa-envelope-o"></i> Resend invite
                                         </a>
                                     </td>
@@ -66,7 +66,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">Invite to team "{{$team->name}}"</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="post" action="{{route('teams.members.invite', $team)}}">
+                        <form class="form-horizontal" method="post" action="{{route('cockpit.teams.members.invite', $team)}}">
                             {!! csrf_field() !!}
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">E-Mail Address</label>

@@ -106,8 +106,9 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $input = $request->all();
-
-        $validator = Validator::make($input, Role::$rules);
+        $rules = Role::$rules;
+        $rules['name'] = $rules['name']."|unique:".config('permission.table_names.roles').",NULL,".$role->id.",id";
+        $validator = Validator::make($input, $rules);
         $validator->setAttributeNames(Role::$attrs);
 
         if ($validator->fails()) {

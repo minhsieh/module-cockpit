@@ -126,7 +126,6 @@ $(document).on('click','.btn_user_delete',function(){
         closeOnConfirm: false
     },
     function(){
-        console.log('test');
         btn.next('.form_user_delete').submit();
     });
 });

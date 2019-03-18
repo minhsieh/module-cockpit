@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create a new team</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="post" action="{{route('teams.store')}}">
+                        <form class="form-horizontal" method="post" action="{{route('cockpit.teams.store')}}">
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

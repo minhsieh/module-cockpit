@@ -53,7 +53,8 @@
                                 <th>id</th>
                                 <th>Name</th>
                                 <th>Display Name</th>
-                                <th>權限數</th>
+                                <th>Team</th>
+                                <th>Permissions</th>
                                 <th>Guard</th>
                                 <th>動作</th>
                             </tr>
@@ -67,6 +68,14 @@
                                 <td>{{$role->id}}</td>
                                 <td>{{$role->name}}</td>
                                 <td>{{$role->display_name}}</td>
+                                <td>
+                                    @if(!empty($role->teams[0]))
+                                    <span class="label label-sm label-primary">{{$role->teams[0]->name}}</span>
+                                    <span class="label label-sm label-warning">{{ $role->teams[0]->id }}</span>
+                                    @else
+                                    <span class="label label-sm label-default">NO TEAM</span>
+                                    @endif
+                                </td>
                                 <td>
                                     @if(($per_count = count($role->permissions)) == 0)
                                     <span class="label label-sm label-default"> 無 </span>

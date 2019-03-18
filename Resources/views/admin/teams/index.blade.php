@@ -56,6 +56,7 @@
                                 <th>聯絡人</th>
                                 <th>電話</th>
                                 <th>Email</th>
+                                <th>角色數</th>
                                 <th>團隊成員</th>
                                 <th>狀態</th>
                                 <th>動作</th>
@@ -67,12 +68,19 @@
                                 <td>
                                     <input type="checkbox" class="checkboxes ids" name="ids[]" value="{{$team->id}}"/>
                                 </td>
-                                <td><a href="{{ route('teams.members.show' , $team->id) }}">{{ $team->tid }}</a></td>
-                                <td><a href="{{ route('teams.members.show' , $team->id) }}">{{ $team->name }}</a></td>
+                                <td><a href="{{ route('cockpit.teams.members.show' , $team->id) }}">{{ $team->tid }}</a></td>
+                                <td><a href="{{ route('cockpit.teams.members.show' , $team->id) }}">{{ $team->name }}</a></td>
                                 <td>@if(isset($team->owner)){{ $team->owner->name }} @else <span class="label label-default">No Owner</span> @endif</td>
                                 <td>{{$team->contact}}</td>
                                 <td>{{$team->tel}}</td>
                                 <td>{{$team->email}}</td>
+                                <td>
+                                    @if($team->roles->count() == 0)
+                                    <span class="label label-sm label-default"> 0 </span>
+                                    @else
+                                    <span class="label label-sm label-success"> {{ $team->roles->count() }} </span>
+                                    @endif
+                                </td>
                                 <td>
                                     @if($team->users->count() == 0)
                                     <span class="label label-sm label-default"> 0 </span>
@@ -94,7 +102,7 @@
                                         </button>
                                         <ul class="dropdown-menu pull-right" role="menu">
                                             <li>
-                                                <a href="{{ route('teams.members.show' , $team->id) }}"><i class="fa fa-eye"></i> 查看 </a>
+                                                <a href="{{ route('cockpit.teams.members.show' , $team->id) }}"><i class="fa fa-eye"></i> 查看 </a>
                                             </li>
                                             <li>
                                                 <a href="{{action('Admin\TeamController@edit',$team->id)}}"><i class="fa fa-pencil"></i> 編輯 </a>

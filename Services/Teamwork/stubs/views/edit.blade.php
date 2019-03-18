@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Edit team {{$team->name}}</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="post" action="{{route('teams.update', $team)}}">
+                        <form class="form-horizontal" method="post" action="{{route('cockpit.teams.update', $team)}}">
                             <input type="hidden" name="_method" value="PUT" />
                             {!! csrf_field() !!}
 

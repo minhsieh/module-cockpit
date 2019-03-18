@@ -36,4 +36,9 @@ class Team extends Model
         'tel' => 'required|string|max:30',
         'email' => 'required|string|email|max:255',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany('Modules\Cockpit\Permission\Models\Role', 'team_roles', 'team_id', 'role_id');
+    }
 }

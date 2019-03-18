@@ -19,7 +19,7 @@ class TeamInviteController extends Controller
 
         if (auth()->check()) {
             $teamwork->acceptInvite($invite);
-            return redirect()->route('teams.index');
+            return redirect()->route('cockpit.teams.index');
         } else {
             session(['invite_token' => $token]);
             return redirect()->to('login');
