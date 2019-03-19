@@ -105,7 +105,9 @@ class UserController extends Controller
         $roles = DB::table($role_table)
                     ->join( 'team_roles' , $role_table.'.id' , 'team_roles.role_id')
                     ->join( $team_user_table , $team_user_table.'.team_id' , 'team_roles.team_id'  )
+                    ->join( $team_table , $team_table.'.id' , $team_user_table.'.team_id' )
                     ->where( $team_user_table.'.user_id' , $user->id )
+                    ->select( $role_table.'.*' , $team_table.'.name as team_name')
                     ->get();
 
         return view($this->view_path.'.show',compact('user','team_roles','roles'));

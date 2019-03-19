@@ -85,7 +85,7 @@
                                     <label class="control-label">add this role to user</label>
                                     <select name="role_id" class="form-control select2">
                                         @foreach($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->display_name }}</option>
+                                        <option value="{{ $role->id }}">{{ $role->team_name }} - {{ $role->display_name }}</option>
                                         @endforeach
                                     </select>
                                 </div> 
