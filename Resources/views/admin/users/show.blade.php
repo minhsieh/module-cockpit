@@ -103,16 +103,20 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Display Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($user->teams as $team)
                                 <tr>
-                                    <td>{{ $team->name}}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><a href="{{ action('Admin\Teams\TeamMemberController@show', $team->id) }}">{{ $team->name}}</a></td>
+                                    <td>
+                                        <a href="javascript:;" class="btn btn-xs btn-danger btn_role_delete"><i class="fa fa-trash-o"></i> Detach</a>
+                                        <form class="form_role_delete" action="{{ action('Admin\UserController@detachTeam',['id'=> $user->id , 'team_id' => $team->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

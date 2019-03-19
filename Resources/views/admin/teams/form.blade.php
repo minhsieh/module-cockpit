@@ -43,7 +43,7 @@
                     </ul>
                 </div>
                 <div class="portlet-body">
-                    <form action="@if($form_type == 'create') {{action('Admin\TeamController@store')}} @elseif($form_type == 'edit') {{action('Admin\TeamController@update' , $team->id)}} @endif" method="POST" class="form-horizontal form-bordered"  enctype="multipart/form-data">
+                    <form action="@if($form_type == 'create') {{action('Admin\Teams\TeamController@store')}} @elseif($form_type == 'edit') {{action('Admin\Teams\TeamController@update' , $team->id)}} @endif" method="POST" class="form-horizontal form-bordered"  enctype="multipart/form-data">
                     <div class="tab-content form-horizontal form-bordered">
                         <div class="tab-pane active" id="normal">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -107,7 +107,7 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="{{action('Admin\TeamController@index')}}" class="btn btn-default"><i class="fa fa-arrow-left"></i> 返回</a>
+                                <a href="{{action('Admin\Teams\TeamController@index')}}" class="btn btn-default"><i class="fa fa-arrow-left"></i> 返回</a>
                                 <button type="submit" class="btn blue-hoki pull-right"><i class="fa fa-check"></i> 送出</button>
                             </div>
                         </div>

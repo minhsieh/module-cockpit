@@ -198,7 +198,7 @@ class UserController extends Controller
      * @param $role_id
      * @return \Illuminate\Http\Response
      */
-    public function removeRole(Request $request , $user_id , $role_id)
+    public function removeRole($user_id , $role_id)
     {
         $user = User::findOrFail($user_id);
         $role = Role::findOrFail($role_id);
@@ -206,5 +206,24 @@ class UserController extends Controller
         $user->removeRole($role);
 
         return redirect()->action('Admin\UserController@show',$user_id)->with('success','Remove role "'.$role->display_name.'" success');
+    }
+
+    public function detachTeam($user_id , $team_id)
+    {
+        $teamModel = config('teamwork.team_model');
+        $team = $teamModel::findOrFail($team_id);
+        if (!auth()->user()->isOwnerOfTeam($team) && !auth()->user()->hasPermissionTo('manage_teams')) {
+            abort(403);
+        }
+
+        $userModel = config('teamwork.user_model');
+        $user = $userModel::findOrFail($user_id);
+        if ($user->getKey() === auth()->user()->getKey() && !auth()->user()->hasPermissionTo('manage_teams') ) {
+            abort(404);
+        }
+
+        $user->detachTeam($team);
+
+        return redirect()->action('Admin\UserController@show',$user_id)->with('success','Detach user "'.$user->name.'" from team "'.$team->name.'" success');
     }
 }

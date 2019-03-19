@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Cockpit\Http\Controllers\Admin;
+namespace Modules\Cockpit\Http\Controllers\Admin\Teams;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -63,7 +63,7 @@ class TeamController extends Controller
             
         }
 
-        return redirect()->action('Admin\TeamController@index')->with('success','Team created successfully.');
+        return redirect()->action('Admin\Teams\TeamController@index')->with('success','Team created successfully.');
     }
 
 
@@ -123,7 +123,7 @@ class TeamController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        return redirect()->action('Admin\TeamController@index')->with('success','Team updated successfully');
+        return redirect()->action('Admin\Teams\TeamController@index')->with('success','Team updated successfully');
     }
 
 
@@ -139,6 +139,6 @@ class TeamController extends Controller
         TeamRole::where('team_id',$team->id)->delete();
         $team->delete();
 
-        return redirect()->action('Admin\TeamController@index')->with('success','Team "'.$team->name.'" deleted successfully');
+        return redirect()->action('Admin\Teams\TeamController@index')->with('success','Team "'.$team->name.'" deleted successfully');
     }
 }

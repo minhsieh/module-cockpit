@@ -88,7 +88,7 @@
                     <div class="panel-heading clearfix">
                         Members of team "{{$team->name}}"
                         <div class="pull-right">
-                            <a href="{{action('Admin\TeamController@edit',$team->id)}}" class="btn btn-xs btn-primary">
+                            <a href="{{action('Admin\Teams\TeamController@edit',$team->id)}}" class="btn btn-xs btn-primary">
                                 <i class="fa fa-pencil"></i> Edit
                             </a>
                             <a href="{{route('cockpit.teams.index')}}" class="btn btn-xs btn-default">
@@ -112,7 +112,7 @@
                                             <form style="display: inline-block;" action="{{route('cockpit.teams.members.destroy', [$team, $user])}}" method="post">
                                                 {!! csrf_field() !!}
                                                 <input type="hidden" name="_method" value="DELETE" />
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove</button>
                                             </form>
                                         @endif
                                     </td>
@@ -204,11 +204,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ action('Admin\TeamMemberController@editRole',['id' => $team->id , 'role_id' => $role->id]) }}" class="btn btn-sm btn-primary">
+                                        <a href="{{ action('Admin\Teams\TeamRoleController@editRole',['id' => $team->id , 'role_id' => $role->id]) }}" class="btn btn-sm btn-primary">
                                             <i class="fa fa-pencil"></i> Edit
                                         </a>
                                         <a href="javascript:;" class="btn btn-sm btn-danger btn_role_delete"><i class="fa fa-trash-o"></i> Delete</a>
-                                        <form class="form_role_delete" action="{{ action('Admin\TeamMemberController@deleteRole',['id'=> $team->id, 'role_id' => $role->id]) }}" method="POST">
+                                        <form class="form_role_delete" action="{{ action('Admin\Teams\TeamRoleController@deleteRole',['id'=> $team->id, 'role_id' => $role->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                         </form>

@@ -27,6 +27,7 @@
                         @elseif($form_type == 'edit')
                         <i class="fa fa-pencil"></i>編輯角色
                         @endif
+                        for team "{{ $team->name }}"
                     </div>
                     <ul class="nav nav-tabs">
                         <li class="active">
@@ -35,7 +36,7 @@
                     </ul>
                 </div>
                 <div class="portlet-body form">
-                    <form action="@if($form_type == 'create') {{action('Admin\TeamMemberController@storeRole',$team->id)}} @elseif($form_type == 'edit') {{action('Admin\TeamMemberController@updateRole',['id' => $team->id , 'role_id' => $role->id])}} @endif" method="POST" class="horizontal-form"  enctype="multipart/form-data">
+                    <form action="@if($form_type == 'create') {{action('Admin\Teams\TeamRoleController@storeRole',$team->id)}} @elseif($form_type == 'edit') {{action('Admin\Teams\TeamRoleController@updateRole',['id' => $team->id , 'role_id' => $role->id])}} @endif" method="POST" class="horizontal-form"  enctype="multipart/form-data">
                     <div class="tab-content">
                         <div class="tab-pane active" id="normal">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -76,7 +77,7 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="{{action('Admin\TeamMemberController@show',$team->id)}}" class="btn btn-default"><i class="fa fa-arrow-left"></i> 返回</a>
+                                <a href="{{action('Admin\Teams\TeamMemberController@show',$team->id)}}" class="btn btn-default"><i class="fa fa-arrow-left"></i> 返回</a>
                                 <button type="submit" class="btn blue-hoki pull-right"><i class="fa fa-check"></i> 送出</button>
                             </div>
                         </div>

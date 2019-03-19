@@ -39,7 +39,7 @@
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-12">
-                                <a class="btn green" href="{{action('Admin\TeamController@create')}}">新增 <i class="fa fa-plus"></i></a>
+                                <a class="btn green" href="{{action('Admin\Teams\TeamController@create')}}">新增 <i class="fa fa-plus"></i></a>
                                 <!-- <button class="btn red" style="display:none;">刪除 <i class="fa fa-trash"></i></button> -->
                             </div>
                         </div>
@@ -105,12 +105,12 @@
                                                 <a href="{{ route('cockpit.teams.members.show' , $team->id) }}"><i class="fa fa-eye"></i> 查看 </a>
                                             </li>
                                             <li>
-                                                <a href="{{action('Admin\TeamController@edit',$team->id)}}"><i class="fa fa-pencil"></i> 編輯 </a>
+                                                <a href="{{action('Admin\Teams\TeamController@edit',$team->id)}}"><i class="fa fa-pencil"></i> 編輯 </a>
                                             </li>
                                             <li class="divider"></li>
                                             <li>
                                                 <a class="btn_team_delete"><i class="fa fa-trash-o "></i>刪除</a>
-                                                <form class="form_team_delete" action="{{ action('Admin\TeamController@destroy',$team->id) }}" method="POST">
+                                                <form class="form_team_delete" action="{{ action('Admin\Teams\TeamController@destroy',$team->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
