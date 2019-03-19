@@ -10,6 +10,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Modules\Cockpit\Services\Teamwork\Events\UserJoinedTeam;
 use Modules\Cockpit\Services\Teamwork\Events\UserLeftTeam;
 use Modules\Cockpit\Services\Teamwork\Exceptions\UserNotInTeamException;
@@ -177,6 +178,16 @@ trait UserHasTeams
     {
         $team        = $this->retrieveTeamId( $team );
         $this->teams()->detach( $team );
+
+        /**
+         * Delete relationship with Team and Roles.
+         */
+        $model_role_table = config('permission.table_names.model_has_roles');
+        $role_team = DB::table($model_role_table)
+                        ->join('team_roles','team_roles.role_id',$model_role_table.'.role_id')
+                        ->where('team_roles.team_id' , $team)
+                        ->where($model_role_table.'.model_id', $this->getKey())
+                        ->delete();
 
         event(new UserLeftTeam($this, $team));
 

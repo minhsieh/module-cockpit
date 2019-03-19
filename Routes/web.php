@@ -34,6 +34,8 @@ Route::prefix('cockpit')->name('cockpit.')->group(function() {
     Route::prefix('admin')->middleware('cockpit.auth')->group(function() {
         Route::get('/' , 'Admin\IndexController@index');
         Route::resource('users','Admin\UserController');
+        Route::post('users/{id}/assignrole', 'Admin\UserController@assignRole');
+        Route::delete('users/{id}/removerole/{role_id}', 'Admin\UserController@removeRole');
         Route::resource('teams','Admin\TeamController');
         Route::resource('permissions','Admin\PermissionController');
         Route::resource('roles','Admin\RoleController');

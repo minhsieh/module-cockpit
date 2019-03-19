@@ -58,7 +58,6 @@ class TeamMemberController extends Controller
 
         $user->detachTeam($team);
 
-
         return redirect(action('Admin\TeamMemberController@show',$team->id))->with('success', 'Detach member "'.$user->name.'" from team "'.$team->name.'" success');
     }
 

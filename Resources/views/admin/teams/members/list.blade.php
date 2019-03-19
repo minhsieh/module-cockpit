@@ -106,7 +106,7 @@
                             </thead>
                             @foreach($team->users AS $user)
                                 <tr>
-                                    <td>{{$user->name}}</td>
+                                    <td><a href="{{ action('Admin\UserController@show',$user->id) }}">{{$user->name}}</a></td>
                                     <td>
                                         @if((auth()->user()->isOwnerOfTeam($team) && auth()->user()->getKey() !== $user->getKey()) || auth()->user()->can('manage_teams'))
                                             <form style="display: inline-block;" action="{{route('cockpit.teams.members.destroy', [$team, $user])}}" method="post">

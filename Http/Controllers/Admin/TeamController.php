@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Modules\Cockpit\Entities\Team;
+use Modules\Cockpit\Entities\TeamRole;
 
 class TeamController extends Controller
 {
@@ -134,8 +135,10 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
+        $team->roles()->delete();
+        TeamRole::where('team_id',$team->id)->delete();
         $team->delete();
 
-        return redirect()->action('Admin\TeamController@index')->with('success','Team deleted successfully');
+        return redirect()->action('Admin\TeamController@index')->with('success','Team "'.$team->name.'" deleted successfully');
     }
 }

@@ -4,6 +4,7 @@ namespace Modules\Cockpit\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Cockpit\Services\Teamwork\Traits\TeamworkTeamTrait;
+use Modules\Cockpit\Events\TeamDeleted;
 
 class Team extends Model
 {
@@ -35,6 +36,10 @@ class Team extends Model
         'contact' => 'required|string|max:30',
         'tel' => 'required|string|max:30',
         'email' => 'required|string|email|max:255',
+    ];
+
+    protected $dispatchesEvents = [
+        'deleted' => TeamDeleted::class,
     ];
 
     public function roles()
