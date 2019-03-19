@@ -52,6 +52,7 @@
                                 </th>
                                 <th>姓名</th>
                                 <th>Email</th>
+                                <th>Current Team</th>
                                 <th>最後登入</th>
                                 <th>建立時間</th>
                                 <th>狀態</th>
@@ -66,6 +67,13 @@
                                 </td>
                                 <td><a href="{{ action('Admin\UserController@show',$user->id) }}">{{$user->name}}</a></td>
                                 <td>{{$user->email}}</td>
+                                <td>
+                                    @if(!empty($user->currentTeam->name))
+                                    {{$user->currentTeam->name}}
+                                    @else
+                                    <span class="label label-sm label-default">No Team</span>
+                                    @endif
+                                </td>
                                 <td>{{$user->last_login}}</td>
                                 <td>{{$user->created_at}}</td>
                                 <td>

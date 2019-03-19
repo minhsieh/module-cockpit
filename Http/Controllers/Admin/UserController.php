@@ -251,4 +251,17 @@ class UserController extends Controller
 
         return redirect()->action('Admin\UserController@show',$user_id)->with('success','Detach user "'.$user->name.'" from team "'.$team->name.'" success');
     }
+
+    public function switchTeam(Request $request , $user_id)
+    {
+        $userModel = config('teamwork.user_model');
+        $user = $userModel::findOrFail($user_id);
+
+        $teamModel = config('teamwork.team_model');
+        $team = $teamModel::findOrFail($request->input('team_id'));
+
+        $user->switchTeam($request->input('team_id'));
+
+        return redirect()->action('Admin\UserController@show',$user_id)->with('success','Switch user "'.$user->name.'" to team "'.$team->name.'" success');
+    }
 }

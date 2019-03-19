@@ -116,6 +116,25 @@
                                     </div>
                                 </div> 
                             </form>
+
+                            <form method="post" action="{{ action('Admin\UserController@switchTeam',$user->id) }}">
+                                {!! csrf_field() !!}
+                                <div class="form-group">
+                                    <label class="control-label">Switch current team</label>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <select name="team_id" class="form-control select2">
+                                                @foreach($user->teams as $team)
+                                                <option value="{{ $team->id }}" @if($team->id == $user->currentTeam->id) selected @endif>{{ $team->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn green">Switch</button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </form>
                         </div>
                     </div>
                 </div>
