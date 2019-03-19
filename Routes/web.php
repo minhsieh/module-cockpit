@@ -36,6 +36,7 @@ Route::prefix('cockpit')->name('cockpit.')->group(function() {
         Route::resource('users','Admin\UserController');
         Route::post('users/{id}/assignrole', 'Admin\UserController@assignRole');
         Route::delete('users/{id}/removerole/{role_id}', 'Admin\UserController@removeRole');
+        Route::post('users/{id}/attachteam', 'Admin\UserController@attachTeam');
         Route::delete('users/{id}/detachteam/{team_id}', 'Admin\UserController@detachTeam');
         Route::resource('teams','Admin\Teams\TeamController');
         Route::resource('permissions','Admin\PermissionController');

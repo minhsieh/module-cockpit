@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Modules\Cockpit\Entities\User;
+use Modules\Cockpit\Entities\Team;
 use Modules\Cockpit\Permission\Models\Role;
 
 class UserController extends Controller
@@ -109,8 +110,10 @@ class UserController extends Controller
                     ->where( $team_user_table.'.user_id' , $user->id )
                     ->select( $role_table.'.*' , $team_table.'.name as team_name')
                     ->get();
+        
+        $teams = Team::select('id','name')->where('is_active',true)->get();
 
-        return view($this->view_path.'.show',compact('user','team_roles','roles'));
+        return view($this->view_path.'.show',compact('user','team_roles','roles','teams'));
     }
 
 
@@ -208,6 +211,28 @@ class UserController extends Controller
         return redirect()->action('Admin\UserController@show',$user_id)->with('success','Remove role "'.$role->display_name.'" success');
     }
 
+    /**
+     * Attach Team to this user
+     * 
+     * @param $user_id
+     * @return response
+     */
+    public function attachTeam(Request $request , $user_id)
+    {
+        $teamModel = config('teamwork.team_model');
+        $team = $teamModel::findOrFail($request->input('team_id'));
+        
+        $userModel = config('teamwork.user_model');
+        $user = $userModel::findOrFail($user_id);
+
+        $user->attachTeam($team);
+
+        return redirect()->action('Admin\UserController@show',$user_id)->with('success','Attach user "'.$user->name.'" to team "'.$team->name.'" success');
+    }
+
+    /**
+     * Detach this user from team_id
+     */
     public function detachTeam($user_id , $team_id)
     {
         $teamModel = config('teamwork.team_model');

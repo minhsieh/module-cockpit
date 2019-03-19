@@ -78,20 +78,45 @@
                         Modify user role
                     </div>
                     <div class="panel-body form">
-                        <form class="form" method="post" action="{{ action('Admin\UserController@assignRole',$user->id) }}">
-                            {!! csrf_field() !!}
-                            <div class="form-body">
+                        <div class="form-body">
+                            <form method="post" action="{{ action('Admin\UserController@assignRole',$user->id) }}">
+                                {!! csrf_field() !!}
                                 <div class="form-group">
                                     <label class="control-label">add this role to user</label>
-                                    <select name="role_id" class="form-control select2">
-                                        @foreach($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->team_name }} - {{ $role->display_name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <select name="role_id" class="form-control select2">
+                                                @foreach($roles as $role)
+                                                <option value="{{ $role->id }}">{{ $role->team_name }} - {{ $role->display_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn green">Add</button>
+                                        </div>
+                                    </div>
                                 </div> 
-                                <button type="submit" class="btn green">Add</button>
-                            </div>
-                        </form>
+                            </form>
+
+                            <form method="post" action="{{ action('Admin\UserController@attachTeam',$user->id) }}">
+                                {!! csrf_field() !!}
+                                <div class="form-group">
+                                    <label class="control-label">Attach user to team</label>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <select name="team_id" class="form-control select2">
+                                                @foreach($teams as $team)
+                                                <option value="{{ $team->id }}">{{ $team->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn green">Attach</button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
