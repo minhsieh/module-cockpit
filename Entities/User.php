@@ -16,6 +16,8 @@ class User extends Authenticatable
     use HasRoles;
     use UserHasTeams;
 
+    protected $guard_name = 'web';
+
     protected $fillable = [
         'name',
         'email',
